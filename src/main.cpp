@@ -1,8 +1,8 @@
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 
-pros::MotorGroup left_motors({18, -19, 20}, pros::MotorGearset::blue);
-pros::MotorGroup right_motors({-12, 13, -14}, pros::MotorGearset::blue);
+pros::MotorGroup right_motors({18, -19, 20}, pros::MotorGearset::blue);
+pros::MotorGroup left_motors({-12, 13, -14}, pros::MotorGearset::blue);
 
 // drivetrain settings
 lemlib::Drivetrain
@@ -41,15 +41,15 @@ lemlib::ControllerSettings
     );
 
 lemlib::ControllerSettings
-    angular_controller(3,  // proportional gain (kP)
-                       0,  // integral gain (kI)
-                       20, // derivative gain (kD)
-                       0,  // anti windup
-                       0,  // small error range, in inches
-                       0,  // small error range timeout, in milliseconds
-                       0,  // large error range, in inches
-                       0,  // large error range timeout, in milliseconds
-                       0   // maximum acceleration (slew)
+    angular_controller(1, // proportional gain (kP)
+                       0,   // integral gain (kI)
+                       1,  // derivative gain (kD)
+                       0,   // anti windup
+                       0,   // small error range, in inches
+                       0,   // small error range timeout, in milliseconds
+                       0,   // large error range, in inches
+                       0,   // large error range timeout, in milliseconds
+                       0    // maximum acceleration (slew)
     );
 
 lemlib::Chassis chassis(drivetrain,         // drivetrain settings
@@ -133,7 +133,8 @@ void autonomous() {
     // set position to x:0, y:0, heading:0
     chassis.setPose(0, 0, 0);
     // turn to face heading 90 with a very long timeout
-    chassis.turnToHeading(90, 100000, {.maxSpeed = 30});
+    chassis.turnToHeading(180, 100000, {.maxSpeed = 30});
+    // chassis.turnToPoint(50, 50, 1000, {.maxSpeed = 30});
 }
 
 /**
